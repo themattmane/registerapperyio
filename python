@@ -1,0 +1,28 @@
+# Register Section
+@app.route('/register', methods=['POST','PUT'])
+def register():
+
+    #Registration Services (Request credentials from index.html)
+    register_username = request.form['registerusername']
+    register_password = request.form['registerpassword']
+    register_companyname = request.form['registercompanyname']
+    register_mobile = request.form['registermobile']
+    register_email = request.form['registeremail']
+    register_legalname = request.form['registerlegalname']
+
+    #Post to database in Appery.io (DO NOT CHANGE SYNTAX VERY TRICKY TO FIX)
+    rawpayload = \
+        '{"username":"' + register_username + '",' \
+        '"password":"' + register_password + '",' \
+        '"CompanyName":"' + register_companyname + '",' \
+        '"Mobile":"' + register_mobile + '",' \
+        '"email":"' + register_email + '",' \
+        '"LegalName":"' + register_legalname + '"}'
+
+    url = "https://api.appery.io/rest/1/db/users"
+    payload = rawpayload
+    headers = {
+    'x-appery-database-id': "Appery.io DATABASE ID",
+        'content-type': "application/json",
+        'cache-control': "no-cache",
+            }
